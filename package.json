@@ -1,7 +1,7 @@
 {
   "name": "ftry",
 	"type": "module",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "ftry converts a promise or function call to a 2-tuple response. Inspired by golang style error handling without try/catch.",
   "keywords": [
     "flat",
