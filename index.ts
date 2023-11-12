@@ -1,34 +1,45 @@
-type FlatryFn<Result extends unknown> = () => Result;
-function flatryFunction<Result>(fn: FlatryFn<Result>) {
+type FtryFunction<$Result extends unknown> = () => $Result;
+
+function ftryFunction<$Result>(fn: FtryFunction<$Result>) {
   try {
     return [null, fn()] as const;
-  } catch (err: unknown) {
-    return [err] as const;
+  } catch (error: unknown) {
+    return [error] as const;
   }
 }
 
-function flatryPromise<Error, Result>(promise: Promise<Result>) {
-  var successFn = function (value: Result) {
+function ftryPromise<$Error, $Result>(promise: Promise<$Result>) {
+  var successFn = function (value: $Result) {
     return [null, value] as const;
   };
-  var errorFn = function (err: Error) {
+  var errorFn = function (err: $Error) {
     return [err] as const;
   };
   return promise.then(successFn, errorFn);
 }
 
-export default function flatry<T>(
-  promise: Promise<T>
-): Promise<[unknown, never] | [null, T]>;
-export default function flatry<T>(fn: () => T): [unknown, never] | [null, T];
-export default function flatry(functionOrPromise: any): any {
+export default function ftry<$Type>(
+  promise: Promise<$Type>
+): Promise<[unknown, never] | [null, $Type]>;
+export default function ftry<T>(fn: () => T): [unknown, never] | [null, T];
+export default function ftry(functionOrPromise: any): any {
   if (typeof functionOrPromise === "function") {
-    return flatryFunction(functionOrPromise);
+    return ftryFunction(functionOrPromise);
   }
 
   if (Promise.resolve(functionOrPromise) === functionOrPromise) {
-    return flatryPromise(functionOrPromise);
+    return ftryPromise(functionOrPromise);
   }
 
   throw new Error("Argument must be a function or Promise");
+}
+
+export { ferror as ferr };
+export function ferror<$Error>(err: $Error): [$Error, never] {
+  return [err] as unknown as [$Error, never];
+}
+
+export { fresult as fres };
+export function fresult<$Result>(result: $Result): [null, $Result] {
+  return [null, result];
 }
