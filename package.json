@@ -1,7 +1,8 @@
 {
-  "name": "flatry",
-  "version": "1.0.14",
-  "description": "Flatry converting promise or function to flat array response. Inspired by golang style error handling without try/catch.",
+  "name": "ftry",
+	"type": "module",
+  "version": "1.0.15",
+  "description": "ftry converts a promise or function call to a 2-tuple response. Inspired by golang style error handling without try/catch.",
   "keywords": [
     "flat",
     "flatten",
@@ -14,8 +15,6 @@
     "try",
     "catch"
   ],
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc index.ts --declaration --outDir esm --lib es2015",
