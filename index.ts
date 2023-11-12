@@ -18,6 +18,7 @@ function ftryPromise<$Error, $Result>(promise: Promise<$Result>) {
   return promise.then(successFn, errorFn);
 }
 
+export { ftry };
 export default function ftry<$Type>(
   promise: Promise<$Type>
 ): Promise<[unknown, never] | [null, $Type]>;

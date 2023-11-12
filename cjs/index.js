@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.fresult = exports.fres = exports.ferror = exports.ferr = void 0;
+exports.fresult = exports.fres = exports.ferror = exports.ferr = exports.ftry = void 0;
 function ftryFunction(fn) {
     try {
         return [null, fn()];
@@ -28,6 +28,7 @@ function ftry(functionOrPromise) {
     throw new Error("Argument must be a function or Promise");
 }
 exports["default"] = ftry;
+exports.ftry = ftry;
 function ferror(err) {
     return [err];
 }
